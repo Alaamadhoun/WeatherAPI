@@ -6,7 +6,6 @@ const Form = props => {
       <input type="text" name="city" placeholder="City..." />
       <input type="text" name="country" placeholder="Country..." />
       <button>Get Weather</button>
-      Form Component
     </form>
   );
 };

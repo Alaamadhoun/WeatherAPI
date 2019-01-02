@@ -7,7 +7,7 @@ const API_KEY = "528d30ed7c37939379e836b4798a0dab";
 
 class App extends Component {
   state = {
-    tempereture: "",
+    temperature: "",
     city: "",
     country: "",
     humidity: "",
@@ -24,19 +24,19 @@ class App extends Component {
       `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_KEY}`
     );
     const data = await api.json();
-    console.log(data);
-    if (city & country) {
+
+    if (city && country) {
       this.setState({
-        tempereture: data.main.temp,
-        city: "data.name",
-        country: "data.sys.country",
-        humidity: "data.main.humidity",
-        description: "data.weather[0].description",
+        temperature: data.main.temp,
+        city: data.name,
+        country: data.sys.country,
+        humidity: data.main.humidity,
+        description: data.weather[0].description,
         error: ""
       });
     } else {
       this.setState({
-        tempereture: "",
+        temperature: "",
         city: "",
         country: "",
         humidity: "",
@@ -45,11 +45,19 @@ class App extends Component {
       });
     }
   };
+
   render() {
     return (
       <div className="App">
         <Form getWeather={this.getWeather} />
-        <Weather />
+        <Weather
+          temperature={this.state.temperature}
+          city={this.state.city}
+          country={this.state.country}
+          humidity={this.state.humidity}
+          description={this.state.description}
+          error={this.state.error}
+        />
       </div>
     );
   }
